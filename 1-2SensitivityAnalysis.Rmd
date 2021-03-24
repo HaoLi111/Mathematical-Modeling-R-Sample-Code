@@ -1,5 +1,19 @@
+---
+title: "1-2SensitivityAnalysis"
+author: "Hao Li"
+date: "3/23/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r}
 #1-1-2
-#warnings('off')#Omit the warnings from Ryacas#IT DOES NOT WORK HOWEVER
+#warnings('off')#Omit the warnings from Ryacas
 #Preload
 library(Deriv)
 library(Ryacas)
@@ -35,8 +49,11 @@ t1_opt #solution for optimal value for t w.r.t. r
 P_opt = gsub("t1",as.character(t1_opt),as.character(P),fixed = TRUE)
 P_opt = parse(text = P_opt)
 P_opt
-#Above repeats 1-1 but with a variable r instead of constants, get symbolic expression sln_expr
+```
 
+# Above repeats 1-1 but with a variable r instead of constants, get symbolic expression sln_expr
+
+```{r}
 r=(8:12)*0.001
 x=eval({r<-(8:12)*0.001;t1_opt})
 plot(r,x,type="b",xlab="r($/Day)",ylab="x(Day)")#PLOT1
@@ -50,11 +67,12 @@ S = yac_assign(S,"S")
 S = yac("Simplify(S)",rettype = "expr")
 S
 
+```
 
 
-#-------------------------------------------------------------------------------
-#2) WITH RESPECT TO G
+# 2) WITH RESPECT TO G
 
+```{r}
 #LOAD ASSUMPTIONS
 
 detach("package:Ryacas", unload = TRUE)
@@ -98,5 +116,11 @@ S = expression(dxdr*g/x)
 S = yac_assign(S,"S")
 S = yac("Simplify(S)",rettype = "expr")
 S
+
+
+
+```
+
+
 
 

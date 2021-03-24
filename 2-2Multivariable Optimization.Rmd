@@ -2,7 +2,9 @@
 title: "2-2Multivariable Optimization"
 author: "Hao Li"
 date: "12/01/2019"
-output: word_document
+output:
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -39,7 +41,7 @@ library(plot3D)
 x1=seq(from = 0, to = 10000, length.out = 100);x2=seq(from = 0, to = 10000, length.out = 100)
 m = mesh(x=x1,y=x2)
 z = y(m$x,m$y)
-#layout(matrix(1:2,1))
+layout(matrix(1:2,1))
 
 contour(x1,x2,z,xlab='x1',ylab='x2')
 abline(v=x[1],untf=FALSE)            
@@ -51,13 +53,5 @@ abline(v=5000,col = 'red',untf=FALSE)
 abline(coef=c(10000,-1),col = 'red',untf=FALSE)
 
 persp3D(x1,x2,z)
-
-#3d Visualization with rgl and Plot3Drgl
-#library(plot3Drgl)
-#persp3Drgl(x1,x2,z)
-#grid3d(c('x+','y+','z+'))
-#axis3d(c('x+','y+','z+'))
-#points3D(c(x[1],x[2],y(x[1],x[2])),col ='purple')
-#lines3d(cbind(c(x[1],x[2],y(x[1],x[2])),c(x[1],x[2],0)))
 
 ```

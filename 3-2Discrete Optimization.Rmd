@@ -2,7 +2,9 @@
 title: "3-2Discrete Optimization"
 author: "Hao Li"
 date: "12/01/2019"
-output: word_document
+output:
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -92,5 +94,7 @@ result=re[,which.min(re[3,])]
 (y_min_trans1 = 6-result[1])
 (z_min_trans1 = result[3])
 
+abline(h = x_min_trans1,col= "red")
+abline(v = result[1],col = "red")
 
 ```

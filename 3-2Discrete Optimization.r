@@ -86,4 +86,6 @@ result=re[,which.min(re[3,])]
 (z_min_trans1 = result[3])
 
 
+abline(h = x_min_trans1,col= "red")
+abline(v = result[1],col = "red")
       

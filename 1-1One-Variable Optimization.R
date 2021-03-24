@@ -1,6 +1,10 @@
+#re-edited Mar 2021
+
+
 #This R repository is for demonstration of algorithms involved in the book
 #Mathematical Modeling (4th Edition) written by Prof. Mark. M. Meerschaert
 #coded, edited and tested by Hao Li during Dec. 2018 - Jan. 2019.
+
 
 #1-1-1
 #1 var optimization Symbolic&Numeric calculations and visualization with R
@@ -10,47 +14,53 @@
 #-------------------------------------------------------------------------
 #AIM: FIND P MAX
 #ASSUMPTIONS
-w<-expression(200+5*t)
-p<-expression(0.65-0.01*t)
-C<-expression(0.45*t)
-R<-expression(p*w)
-P<-expression(R-C)
-#t<-expression(t>0)
-#load symbolic calculation package
 library(Ryacas)
-#library(Deriv)
-#Subtitute and expand P(R,c) and get P(t)
-yacas(P)##DO NOT RUN expression((0.65 - 0.01 * t) * (5 * t + 200) - 0.45 * t)
-y<-yacas(P)
-y<-y[["text"]]
-y<-parse(text=y)
-dydt=D(y,"t")#Find the 1st Derivative
-              #dydt<-parse(text=dydt)
-              #<-parse(text=paste(as.character(dydt)[2],as.character(dydt)[3]))
-d2ydt2<-D(dydt,"t")#2nd deriv
+w<-expression(200+5*t1)
+yac_assign(w,"w")
+p<-expression(0.65-0.01*t1)
+yac_assign(p,"p")
+C<-expression(0.45*t1)
+yac_assign(C,"C")
+R<-expression(p*w)
+yac_assign(R,"R")
+P<-expression(R-C)
+
+
+yac_assign(P,"P")
+P = yac("P",rettype = "expr")
+P
+
+
+
+
+dPdt = yac(paste0("D(","t1",")", as.character(P)),rettype = "expr")
+d2Pdt2 = yac(paste0("D(","t1",")", as.character(dPdt)),rettype = "expr")
+sln = yac(paste0("Solve(",dPdt,",t1)"),rettype = "str")
+sln
+l = nchar(sln)
+l
+sln_str = gsub("==","=",substr(sln,2,l-1))
+
+
+sln_expr = parse(text = sln_str)
+sln_expr
+eval(sln_expr)
+(P.max  = eval(P))
+eval(dPdt)
+eval(d2Pdt2)
+
 #-------------------------------------------------------------------------
-#Display Results
-y
-
-dydt
-
-d2ydt2
-
-#> dydt
-#(0.65 - 0.01 * t) * 5 - 0.01 * (5 * t + 200) - 0.45
-#Copy the result of dydt and y
-yacas("(0.65 - 0.01 * t) * 5 - 0.01 * (5 * t + 200) - 0.45")#dydt==0
-#yacas("Simplify(%)")
-yacas("Solve((%)==0,t)")
-yacas("Solve((0.65 - 0.01 * t) * (5 * t + 200) - 0.45 * t==0,t)")#y==0
-##t.opti=0.8/0.1=8
-#-------------------------------------------------------------------------
-plot(0:20,eval({t=0:20;y}),type="l",xlab="Time(D)",ylab="Profit($)")
+plot(0:20,eval({t1=0:20;P}),type="l",xlab="Time(D)",ylab="Profit($)")
 title("Profit~Time")
 abline(v=8,untf=FALSE)
 #------------------------------------------------------------------------
-t.opti=8
-P.max=eval({t<-t.opti;y})
+sln_expr = parse(text = sln_str)
+sln_expr
+eval(sln_expr)
+t.opti=t1
+
+
+P.max=eval({t1<-t.opti;P})
 list("t.opti"=t.opti,"P.max"=P.max)
 
 #detach("package:Ryacas", unload=TRUE)
