@@ -2,6 +2,7 @@
 
 #1. Read and preview
 # read data (change path for your computer)
+# Note: The user must download cm1.txt from the book website because I do not have the copyright to host the data in the github repo
 cm1=scan("cm1.txt")
 n=length(cm1)
 t=seq(1,n,1)

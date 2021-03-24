@@ -1,8 +1,17 @@
 # Mathematical-Modeling-R-Sample-Code
 
+## Mar 2021 Edit: Some new changes
+ - Symbolical expressions are handled by the new Ryacas package. All codes are fixed to run symbolical derivations, expantions with the current Ryacas, which handles variable scopes better
+ - Codes for some other sections (for example, 9.1 are added) unlike the previous section, I massively use functions to tidy up the codes so that they will be easier to read
+ - Used ggplot2 and plot3D, plot3Drgl and other R graphic packages to make plots for multidimensional data
+
+
+
+## Previous Readme
+
 Sample codes for demonstration and comparision between different scientific computing lanuages.
-This repository serves another collection of R sample codes for Meerschaeart's Mathematical Modeling (4 th ed. ) https://www.stt.msu.edu/users/mcubed/modeling.html
-In remembrance of Prof. Meerschaeart https://www.stt.msu.edu/users/mcubed/index.html And many thanks for his suggestions on making the plots.
+This repository serves another collection of R sample codes for Meerschaert's Mathematical Modeling (4 th ed. ) https://www.stt.msu.edu/users/mcubed/modeling.html
+https://www.stt.msu.edu/users/mcubed/index.html And many thanks for his suggestions on making the plots.
 This repository is also different from the package I developed for quick viewing and modeling, linked on the author's website which is listed https://github.com/HaoLi111/rMathModeling
 
 
