@@ -1,0 +1,60 @@
+#Added Mar 2021
+#Rainy day problem
+#different from the previous version
+rainy_day = function(p){
+  Y=0;C=0
+  X = numeric(7)
+  for(t in 1:7){
+    if(runif(1)<p){
+      X[t] = 1
+    }else{
+      X[t] = 0
+    }
+    if(X[t]==1){
+      C=C+1
+    }else{
+      C = 0
+    }
+    if(C>=3) Y=1
+  }
+  return(Y)
+}
+
+rainy_day_rep = function(p,n){
+  S = 0
+  for(k in 1:n){
+    Y = rainy_day(p)
+    S = S+Y
+    
+  }
+  return(S)
+}
+
+rainy_day_rep(p=.5,n=100)
+
+
+nrep = 40#repeat simulation
+n_of_rainy_weeks = numeric(nrep)
+for(i in 1:nrep) n_of_rainy_weeks[i] = rainy_day_rep(p=.5,n=100)
+hist(n_of_rainy_weeks)#Compare this with Fig 9.4
+
+#Sensitivity: yet, repeat 9.4 for different ps to get Fig 9.5
+
+p = seq(from=.3,to=.7,by=.1)
+p_s =NULL
+n_of_rainy_weeks = NULL
+for(i in seq_along(p)){
+  for(j in 1:nrep){
+  n_of_rainy_weeks = c(n_of_rainy_weeks,rainy_day_rep(p[i],100))  
+  p_s = c(p_s,p[i])
+  }
+}
+
+df_sensitivity = data.frame(p = p_s,n_of_rainy_weeks = n_of_rainy_weeks)
+
+library(ggplot2)
+g = ggplot(df_sensitivity,aes(x = p, y = n_of_rainy_weeks))
+
+g+geom_point(alpha = .2)+geom_smooth()+geom_boxplot(aes(facet = factor(p)),alpha = .3)+geom_rug(alpha = .2)
+
+ggplot(df_sensitivity,aes(y = n_of_rainy_weeks)) + geom_boxplot() + facet_grid(.~factor(p)) +geom_rug(alpha = .3)

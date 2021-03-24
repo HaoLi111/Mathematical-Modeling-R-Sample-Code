@@ -9,32 +9,34 @@
 #rm(list = ls())
 library(Ryacas)
 #x1 = Sym('x1');x2 = Sym('x2')
-yacas("f1:=(10/100)*x1-((10/100)/10000)*x1^2-((5/100)/10000)*x1*x2")
-yacas("f2:=(25/100)*x2-((25/100)/6000)*x2^2-((25/200)/6000)*x1*x2")
+yac("f1:=(10/100)*x1-((10/100)/10000)*x1^2-((5/100)/10000)*x1*x2")
+yac("f2:=(25/100)*x2-((25/100)/6000)*x2^2-((25/200)/6000)*x1*x2")
 
 
-yacas("df1dx1:=D(x1) f1")
-yacas("df1dx2:=D(x2) f1")
-yacas("df2dx1:=D(x1) f2")
-yacas("df2dx2:=D(x2) f2")
+yac("df1dx1:=D(x1) f1")
+yac("df1dx2:=D(x2) f1")
+yac("df2dx1:=D(x1) f2")
+yac("df2dx2:=D(x2) f2")
 
 
-yacas("A:={{df1dx1,df1dx2},{df2dx1,df2dx2}}")
-yacas('PrettyForm(A)')
+yac("A:={{df1dx1,df1dx2},{df2dx1,df2dx2}}")
+yac('PrettyForm(A)')
 
 
-yacas("PrettyForm(S)")
+yac("PrettyForm(S)")
 
 
-yacas("B:=Subst(x1,28000/3)A")
-yacas("B:=Subst(x2,4000/3)B")
+yac("B:=Subst(x1,28000/3)A")
+yac("B:=Subst(x2,4000/3)B")
 
 
 
-yacas('PrettyForm(B)')
+yac('PrettyForm(B)')
 
-yacas('E:=CharacteristicEquation(B,x)')
-yacas('E:=Simplify(E)')
-yacas('PrettyForm(E)')
-yacas('lambda:=Solve(E==0,x)')
-yacas('PrettyForm(lambda)')
+yac('E:=CharacteristicEquation(B,x)')
+yac('E:=Simplify(E)')
+yac('PrettyForm(E)')
+yac('TexForm(E)')
+yac('lambda:=Solve(E==0,x)')
+yac('PrettyForm(lambda)')
+
